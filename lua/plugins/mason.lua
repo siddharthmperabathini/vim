@@ -1,33 +1,19 @@
+-- lua/plugins/mason.lua
 return {
-  {
     "williamboman/mason.nvim",
-    opts = {
-      ui = { border = "rounded" },
+    dependencies = {
+        "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
     },
-    config = function(_, opts)
-      require("mason").setup(opts)
+    opts = function(_, opts)
+        return opts
     end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
-    opts = {
-      ensure_installed = {
-        "lua_ls",
-        "pyright",
-        "clangd",
-      },
-    },
     config = function(_, opts)
-      local mason_lspconfig = require("mason-lspconfig")
-
-      mason_lspconfig.setup(opts)
-      mason_lspconfig.setup_handlers({
-        function(server)
-          require("lspconfig")[server].setup({})
-        end,
-      })
+        require("mason").setup(opts)
+        require("mason-lspconfig").setup({
+            ensure_installed = { "pyright", "clangd", "lua_ls" },
+            -- DO NOT use 'handlers' here.
+            -- Let your lsp-plugins.lua handle the setup instead.
+        })
     end,
-  },
 }
-

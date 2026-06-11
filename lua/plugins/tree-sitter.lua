@@ -11,24 +11,34 @@ local ensure_installed_parsers = {
     "make",
     "bash",
 }
-
 return {
     "nvim-treesitter/nvim-treesitter",
-    lazy = false, -- Load immediately
-    event = { "BufReadPost", "BufNewFile" },
+    lazy = false,
     build = ":TSUpdate",
-    config = function()
-        local tsconfig = require("nvim-treesitter.configs")
-
-        tsconfig.setup({
-            ensure_installed = ensure_installed_parsers,
-            auto_install = true,
-            highlight = { enable = true },
-            indent = { enable = true },
-        })
-
-        -- Folding config removed to avoid conflicts with autocompletion
-        -- You can re-enable folding later if needed by configuring foldmethod, foldexpr, etc.
+    opts = function(_, opts)
+        opts.ensure_installed = opts.ensure_installed or {}
+        local parsers = {
+            "lua",
+            "javascript",
+            "python",
+            "c",
+            "vim",
+            "vimdoc",
+            "html",
+            "css",
+            "make",
+            "bash",
+        }
+        for _, parser in ipairs(parsers) do
+            if not vim.tbl_contains(opts.ensure_installed, parser) then
+                table.insert(opts.ensure_installed, parser)
+            end
+        end
+        opts.auto_install = true
+        opts.highlight = opts.highlight or {}
+        opts.highlight.enable = true
+        opts.indent = opts.indent or {}
+        opts.indent.enable = true
+        return opts
     end,
 }
-
