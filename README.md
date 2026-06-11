@@ -1,2 +1,5 @@
-# bronVim
-the King but in Vim form
+# Vim setup
+
+This is customizable after lazy nvim. If you want, you can download that first and then copy the config file to your nvim config folder. init.lua is the main file, and it will load the plugins and settings from the other files in the config folder. You can customize the plugins and settings to your liking.
+
+This project utilizes a Vim setup that is optimized for development with a focus on productivity and ease of use. The configuration includes the use of Tree-sitter for enhanced syntax highlighting and code parsing, which provides a more accurate and visually appealing coding experience. Autocomplete functionality is powered by the Language Server Protocol (LSP), allowing for intelligent code completion and error detection across various programming languages. Additionally, the setup incorporates GitHub Copilot, an AI-powered code assistant that helps generate code snippets and provides suggestions based on the context of your code. The theme settings are customizable, allowing developers to choose from a variety of color schemes to suit their preferences and reduce eye strain during long coding sessions. Overall, this Vim setup is designed to enhance the development workflow and improve efficiency while coding.
